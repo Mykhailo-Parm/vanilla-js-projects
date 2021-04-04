@@ -87,6 +87,30 @@ const btnContainer = document.querySelector(".btn-container");
 // load items
 window.addEventListener("DOMContentLoaded", () => {
   displayMenuItems(menu);
+  displayMenuButtons()
+});
+
+function displayMenuItems(menuItems) {
+  let displayMenu = menuItems.map((item) => {
+    return `<article class="menu-item">
+              <img src=${item.img} class="photo" alt=${item.title}>
+
+              <div class="item-info">
+                <header>
+                  <h4>${item.title}</h4>
+                  <h4 class="price">$${item.price}</h4>
+                </header>
+                <p class="item-text">
+                  ${item.desc}
+                </p>
+              </div>
+            </article>`;
+  });
+  displayMenu = displayMenu.join("");
+  sectionCenter.innerHTML = displayMenu;
+}
+
+function displayMenuButtons() {
   const categories = menu.reduce(
     (values, item) => {
       if (!values.includes(item.category)) {
@@ -105,7 +129,6 @@ window.addEventListener("DOMContentLoaded", () => {
     .join("");
   btnContainer.innerHTML = categoryBtns;
 
-  
   const filterBtns = document.querySelectorAll(".filter-btn");
 
   // filter btns
@@ -124,24 +147,4 @@ window.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
-
-  function displayMenuItems(menuItems) {
-    let displayMenu = menuItems.map((item) => {
-      return `<article class="menu-item">
-              <img src=${item.img} class="photo" alt=${item.title}>
-
-              <div class="item-info">
-                <header>
-                  <h4>${item.title}</h4>
-                  <h4 class="price">$${item.price}</h4>
-                </header>
-                <p class="item-text">
-                  ${item.desc}
-                </p>
-              </div>
-            </article>`;
-    });
-    displayMenu = displayMenu.join("");
-    sectionCenter.innerHTML = displayMenu;
-  }
-});
+}
